@@ -33,7 +33,7 @@ const HomePage = () => {
     };
 
     return (
-        <Box w={"full"} mx={0}>
+        <Box w={"full"} mx={0} mt={3} h="85vh" overflow="hidden">
             <InfiniteScroll
                 dataLength={images.length}
                 next={fetchImages}
@@ -43,16 +43,25 @@ const HomePage = () => {
                         <Text fontWeight={"bold"} fontStyle={"italic"}>You have reached the end of gallery!</Text>
                     </Center>
                 }
+                height={"80vh"}
             >
-                <Grid w={"full"} templateColumns={"repeat(6, 1fr)"} spacing={4} p={1} overflow={"hidden"}>
-                    {images?.map((image, index) => (
-                        <GridItem as={Box} key={`photo-${index}`} borderRadius="md">
-                            <Image src={image?.urls?.small} alt={image?.alt_description}
-                                cursor={"pointer"}
-                            />
-                        </GridItem>
-                    ))}
-                </Grid>
+                <Flex flexDirection={"column"} gap={1}>
+                    <Grid w={"full"} templateColumns={"repeat(5, 1fr)"} spacing={4} p={1}>
+                        {images?.map((image, index) => (
+                            <GridItem  position={"relative"} as={Box} key={`photo-${index}`} borderRadius="md"
+                                cursor={"pointer"} _hover={{ opacity: 0.8 }}
+                            >
+                                <Image src={image?.urls?.small} alt={image?.alt_description} />
+
+                                <Text color={"white"} fontSize={"sm"} fontWeight={"bold"}
+                                    position={"absolute"} bottom={2} left={"50%"} transform={"translateX(-50%)"}
+                                >
+                                    {`${image.user.first_name ?? ""} ${image.user.last_name ?? ""}`}
+                                </Text>
+                            </GridItem>
+                        ))}
+                    </Grid>
+                </Flex>
             </InfiniteScroll>
         </Box>
     );
