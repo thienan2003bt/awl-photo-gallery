@@ -1,9 +1,20 @@
 import React from 'react';
+import { ChakraProvider, ColorModeScript, extendTheme } from '@chakra-ui/react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import themeConfig from './configs/theme.config';
+import { BrowserRouter } from 'react-router-dom';
 
+const theme  = extendTheme(themeConfig);
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    <ChakraProvider theme={theme}>
+        <BrowserRouter>
+            <ColorModeScript initialColorMode={themeConfig.configs.initialColorMode} />
+            <App />
+        </BrowserRouter>
+    </ChakraProvider>
 );
