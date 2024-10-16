@@ -54,7 +54,7 @@ const HomePage = () => {
                             <GridItem  position={"relative"} as={Box} key={`photo-${index}`} borderRadius="md"
                                 cursor={"pointer"} _hover={{ opacity: 0.8 }} onClick={() => navigate("/photos/" + image.id)}
                             >
-                                <Image w={"250px"} height={"250px"} src={image?.urls?.thumb} alt={image?.alt_description} />
+                                <Image w={"250px"} height={"250px"} src={image?.urls?.thumb} alt={image?.alt_description} loading={"lazy"}/>
 
                                 <Text w={"full"} textAlign={"center"}  color={"white"} fontSize={"sm"} fontWeight={"bold"}
                                     position={"absolute"} bottom={2} left={"50%"} transform={"translateX(-50%)"}

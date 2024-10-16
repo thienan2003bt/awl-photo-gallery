@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PhotoService from "../services/photo.service";
 import { RiCloseCircleFill } from "react-icons/ri";
+import PhotoInfo from "../components/photos/PhotoInfo";
 
 function PhotoPage() {
     const {id} = useParams();
@@ -26,7 +27,7 @@ function PhotoPage() {
 
 
     return (
-        <Flex w={"100vw"} height={"100vh"} justifyContent={"stretch"} gap={2} px={"10%"}>
+        <Flex w={"100vw"} height={"100vh"} justifyContent={"stretch"} gap={5} px={"10%"}>
             <Flex flex={15} className="photo-screen" bg={"gray.dark"} 
                 position={"relative"} justifyContent={"center"} alignItems={"center"}
             >
@@ -43,10 +44,8 @@ function PhotoPage() {
                 </Button>
             </Flex>
 
-            <Flex flex={5} flexDirection={"column"} 
-                justifyContent={"center"} alignItems={"flex-start"} gap={2}
-            >
-
+            <Flex flex={5}>
+                <PhotoInfo photo={photo} />
             </Flex>
         </Flex>
     );

@@ -21,7 +21,7 @@ class PhotoService {
             return response;
         } catch (error) {
             console.error('Error fetching photo by id from Unsplash: ', error);
-            return [];
+            return null;
         }
     }
 }
