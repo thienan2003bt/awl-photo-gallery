@@ -10,19 +10,20 @@ class PhotoService {
             return response;
         } catch (error) {
             console.error('Error fetching photo list from Unsplash: ', error);
-            return [];
+            throw new Error(error);
         }
     }
 
     static async getPhotoById(photoId) {
-        try {
-            const response = await axios.get(`https://api.unsplash.com/photos/${photoId}`);
-
+        const response = await axios.get(`https://api.unsplash.com/photos/${photoId}`);
             return response;
-        } catch (error) {
-            console.error('Error fetching photo by id from Unsplash: ', error);
-            return null;
-        }
+        // try {
+        //     const response = await axios.get(`https://api.unsplash.com/photos/${photoId}`);
+        //     return response;
+        // } catch (error) {
+        //     console.error('Error fetching photo by id from Unsplash: ', error);
+        //     throw new Error(error);
+        // }
     }
 }
 

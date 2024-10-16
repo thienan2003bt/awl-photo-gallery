@@ -1,13 +1,15 @@
-import { Button, Flex, Image, Skeleton } from "@chakra-ui/react";
+import { Button, Divider, Flex, Image, Skeleton, SkeletonCircle, SkeletonText, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PhotoService from "../services/photo.service";
 import { RiCloseCircleFill } from "react-icons/ri";
 import PhotoInfo from "../components/photos/PhotoInfo";
+import usePhotoService from "../hooks/services/usePhotoService";
+import SkeletonPhotoInfo from "../components/photos/SkeletonPhotoInfo";
 
 function PhotoPage() {
     const {id} = useParams();
     const navigate = useNavigate();
+    const {getPhotoById} = usePhotoService();
 
     const [photo, setPhoto] = useState({});
     const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +17,7 @@ function PhotoPage() {
     useEffect(() => {
         const fetchPhoto = async () => {
             setIsLoading(true);
-            const response = await PhotoService.getPhotoById(id);
+            const response = await getPhotoById(id);
             if(response) {
                 setPhoto(response);
             }
@@ -31,8 +33,9 @@ function PhotoPage() {
             <Flex flex={15} className="photo-screen" bg={"gray.dark"} 
                 position={"relative"} justifyContent={"center"} alignItems={"center"}
             >
+                
                 {isLoading === true
-                ? <Skeleton h={"100vh"} w={"full"}/>
+                ? <Skeleton h={"100vh"} w={"80%"} />
                 : <Image src={photo?.urls?.full} w={"80%"} h={"100vh"} />
                 }
                 
@@ -45,7 +48,11 @@ function PhotoPage() {
             </Flex>
 
             <Flex flex={5}>
-                <PhotoInfo photo={photo} />
+
+            {isLoading === true
+            ? <SkeletonPhotoInfo />
+            : <PhotoInfo photo={photo} />
+            }
             </Flex>
         </Flex>
     );

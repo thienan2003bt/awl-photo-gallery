@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Image, Spinner, Center, Text, Grid, GridItem, Flex } from '@chakra-ui/react';
-import PhotoService from '../services/photo.service';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useNavigate } from 'react-router-dom';
+import usePhotoService from '../hooks/services/usePhotoService';
 
 const HomePage = () => {
     const IMAGE_PER_PAGE = 12;
 
     const navigate = useNavigate();
+    const { getPhotos } = usePhotoService();
 
     const [images, setImages] = useState([]);
     const [page, setPage] = useState(1);
@@ -19,7 +20,7 @@ const HomePage = () => {
     
     
     const fetchImages = async () => {
-        const newImages = await PhotoService.getPhotos(page, IMAGE_PER_PAGE);
+        const newImages = await getPhotos(page, IMAGE_PER_PAGE);
         console.log("newImages", newImages);
         if(newImages?.length === 0) {
             console.log("Set havingMore to false");
@@ -41,7 +42,7 @@ const HomePage = () => {
                 dataLength={images.length}
                 next={fetchImages}
                 hasMore={havingMore}
-                loader={<Center><Spinner /></Center>}
+                loader={<Center><Spinner  /></Center>}
                 endMessage={<Center>
                         <Text fontWeight={"bold"} fontStyle={"italic"}>You have reached the end of gallery!</Text>
                     </Center>
