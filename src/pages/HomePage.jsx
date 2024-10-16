@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Image, SimpleGrid, Spinner, Center, Text, Grid, GridItem, Flex } from '@chakra-ui/react';
+import { Box, Image, Spinner, Center, Text, Grid, GridItem, Flex } from '@chakra-ui/react';
 import PhotoService from '../services/photo.service';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
     const IMAGE_PER_PAGE = 12;
+
+    const navigate = useNavigate();
+
     const [images, setImages] = useState([]);
     const [page, setPage] = useState(1);
     const [havingMore, setHavingMore] = useState(true);
 
     useEffect(() => {
-        console.log("Call useEffect");
         fetchImages();
     }, []);
     
@@ -46,17 +49,17 @@ const HomePage = () => {
                 height={"80vh"}
             >
                 <Flex flexDirection={"column"} gap={1}>
-                    <Grid w={"full"} templateColumns={"repeat(5, 1fr)"} spacing={4} p={1}>
+                    <Grid w={"60%"} mx={"20%"} templateColumns={"repeat(4, 1fr)"} gap={2} spacing={2} p={1}>
                         {images?.map((image, index) => (
                             <GridItem  position={"relative"} as={Box} key={`photo-${index}`} borderRadius="md"
-                                cursor={"pointer"} _hover={{ opacity: 0.8 }}
+                                cursor={"pointer"} _hover={{ opacity: 0.8 }} onClick={() => navigate("/photos/" + image.id)}
                             >
-                                <Image src={image?.urls?.small} alt={image?.alt_description} />
+                                <Image w={"250px"} height={"250px"} src={image?.urls?.thumb} alt={image?.alt_description} />
 
-                                <Text color={"white"} fontSize={"sm"} fontWeight={"bold"}
+                                <Text w={"full"} textAlign={"center"}  color={"white"} fontSize={"sm"} fontWeight={"bold"}
                                     position={"absolute"} bottom={2} left={"50%"} transform={"translateX(-50%)"}
                                 >
-                                    {`${image.user.first_name ?? ""} ${image.user.last_name ?? ""}`}
+                                    {`${image?.user?.first_name ?? ""} ${image?.user?.last_name ?? ""}`}
                                 </Text>
                             </GridItem>
                         ))}

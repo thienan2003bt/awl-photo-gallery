@@ -9,7 +9,18 @@ class PhotoService {
 
             return response;
         } catch (error) {
-            console.error('Error fetching images from Unsplash: ', error);
+            console.error('Error fetching photo list from Unsplash: ', error);
+            return [];
+        }
+    }
+
+    static async getPhotoById(photoId) {
+        try {
+            const response = await axios.get(`https://api.unsplash.com/photos/${photoId}`);
+
+            return response;
+        } catch (error) {
+            console.error('Error fetching photo by id from Unsplash: ', error);
             return [];
         }
     }
