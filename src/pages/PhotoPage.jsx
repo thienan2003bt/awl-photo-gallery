@@ -1,4 +1,4 @@
-import { Button, Divider, Flex, Image, Skeleton, SkeletonCircle, SkeletonText, Text } from "@chakra-ui/react";
+import { Button, Flex, Image, Skeleton} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { RiCloseCircleFill } from "react-icons/ri";
@@ -29,14 +29,20 @@ function PhotoPage() {
 
 
     return (
-        <Flex w={"100vw"} height={"100vh"} justifyContent={"stretch"} gap={5} px={"10%"}>
-            <Flex flex={15} className="photo-screen" bg={"gray.dark"} 
+        <Flex w={"100vw"} height={"100vh"} 
+            flexDirection={{
+                base: "column",
+                xl: "row",
+            }} 
+            justifyContent={"stretch"} gap={{base: 1, xl: 5}}  p={0} 
+            overflowY={"auto"} overflowX={"hidden"}
+        >
+            <Flex flex={{base: 1, xl: 7}} className="photo-screen" bg={"gray.dark"} 
                 position={"relative"} justifyContent={"center"} alignItems={"center"}
             >
-                
                 {isLoading === true
-                ? <Skeleton h={"100vh"} w={"80%"} />
-                : <Image src={photo?.urls?.full} w={"80%"} h={"100vh"} />
+                ? <Skeleton h={{base: "40vh", xl: "100vh"}} w={"80%"} />
+                : <Image src={photo?.urls?.full} w={"80%"} h={{base: "40vh", xl: "100vh"}} />
                 }
                 
                 <Button position={"absolute"} left={3} top={3}
@@ -47,7 +53,7 @@ function PhotoPage() {
                 </Button>
             </Flex>
 
-            <Flex flex={5}>
+            <Flex  flex={{base: 1, xl: 3}}>
 
             {isLoading === true
             ? <SkeletonPhotoInfo />

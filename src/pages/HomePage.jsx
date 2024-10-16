@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Image, Spinner, Center, Text, Grid, GridItem, Flex } from '@chakra-ui/react';
+import { Box, Image, Spinner, Center, Text, Grid, GridItem, Flex, useColorModeValue } from '@chakra-ui/react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useNavigate } from 'react-router-dom';
 import usePhotoService from '../hooks/services/usePhotoService';
@@ -49,16 +49,31 @@ const HomePage = () => {
                 }
                 height={"80vh"}
             >
-                <Flex flexDirection={"column"} gap={1}>
-                    <Grid w={"60%"} mx={"20%"} templateColumns={"repeat(4, 1fr)"} gap={2} spacing={2} p={1}>
+                <Flex flexDirection={"column"} gap={1} bg={useColorModeValue("gray.light", "gray.dark")}
+                    p={2} alignItems={"center"} justifyContent={"center"}
+                >
+                    <Grid w={"90%"} mx={"5%"}
+                        templateColumns={{
+                            sm: "repeat(1, 1fr)",
+                            md: "repeat(2, 1fr)",
+                            lg: "repeat(3, 1fr)",
+                            xl: "repeat(4, 1fr)",
+                            '2xl': "repeat(5, 1fr)"
+                        }}
+                        placeItems={"center"}
+                        gap={2} spacing={2} p={1}>
                         {images?.map((image, index) => (
-                            <GridItem  position={"relative"} as={Box} key={`photo-${index}`} borderRadius="md"
+                            <GridItem w={"250px"} height={"250px"} position={"relative"} as={Box} key={`photo-${index}`} borderRadius="md"
                                 cursor={"pointer"} _hover={{ opacity: 0.8 }} onClick={() => navigate("/photos/" + image.id)}
                             >
-                                <Image w={"250px"} height={"250px"} src={image?.urls?.thumb} alt={image?.alt_description} loading={"lazy"}/>
+                                <Image w={"250px"} height={"250px"} 
+                                    src={image?.urls?.thumb} alt={image?.alt_description} loading={"lazy"}
+                                    borderRadius={"lg"}
+                                />
 
                                 <Text w={"full"} textAlign={"center"}  color={"white"} fontSize={"sm"} fontWeight={"bold"}
                                     position={"absolute"} bottom={2} left={"50%"} transform={"translateX(-50%)"}
+                                    _hover={{color: "purple.600"}}
                                 >
                                     {`${image?.user?.first_name ?? ""} ${image?.user?.last_name ?? ""}`}
                                 </Text>
