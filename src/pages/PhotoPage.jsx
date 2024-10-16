@@ -14,6 +14,7 @@ function PhotoPage() {
     const [photo, setPhoto] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
+    // Fetch photo data by id whenever component did mount or /:id changed
     useEffect(() => {
         const fetchPhoto = async () => {
             setIsLoading(true);
@@ -27,6 +28,20 @@ function PhotoPage() {
         fetchPhoto();
     }, [id]);
 
+    // Handle keydown event
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                navigate('/photos');
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+
+        // Clean up the event listener on component unmount
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [navigate]);
 
     return (
         <Flex w={"100vw"} height={"100vh"} 

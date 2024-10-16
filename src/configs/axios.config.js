@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-const instance = axios.create({
-});
+const instance = axios.create({});
 
-// instance.defaults.headers.common['Authorization'] = `Bearer ${store.getState()?.account?.userInfo?.access_token ?? 'AUTH_TOKEN'}`;
-//REQUEST
+//REQUEST INTERCEPTOR
 instance.interceptors.request.use((config) => {
     const unsplashAccessKey = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
     if(unsplashAccessKey) {
@@ -18,7 +16,7 @@ instance.interceptors.request.use((config) => {
 });
 
 
-//RESPONSE
+//RESPONSE INTERCEPTOR
 instance.interceptors.response.use((response) => {
     return response.data;
 }, (err) => {
@@ -27,7 +25,5 @@ instance.interceptors.response.use((response) => {
 
     return data ?? Promise.reject(new Error(msg ?? ''));
 });
-
-
 
 export default instance;

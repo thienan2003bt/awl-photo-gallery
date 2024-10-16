@@ -1,5 +1,7 @@
 import { useToast } from "@chakra-ui/react"
 
+// Custom hook for showing toast messages
+
 function useShowToast() {
     const toast = useToast();
     const showToast = (title, description, status, duration = 3000) => {

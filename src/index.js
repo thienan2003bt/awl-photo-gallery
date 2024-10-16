@@ -6,6 +6,7 @@ import App from './App';
 import themeConfig from './configs/theme.config';
 import { BrowserRouter } from 'react-router-dom';
 
+// Using Theme UI configuration imported from configs folder
 const theme  = extendTheme(themeConfig);
 
 

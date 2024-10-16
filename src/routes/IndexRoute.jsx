@@ -3,6 +3,8 @@ import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/HomePage";
 import PhotoPage from "../pages/PhotoPage";
 
+// The routing components for application
+
 function IndexRoute() {
     return (
         <Routes>

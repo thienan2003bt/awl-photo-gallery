@@ -40,7 +40,7 @@ function PhotoInfo({ photo }) {
                     </Flex>
                 </Flex>
 
-                <Text color={"white"} fontSize={14}>Bio: {user?.bio}</Text>
+                <Text color={"white"} fontSize={14}>Bio: {user?.bio ?? "Bio placeholder."}</Text>
             </Flex>
             <Divider my={{base: 1, lg: 3}}/>
 
@@ -52,10 +52,10 @@ function PhotoInfo({ photo }) {
                     justifyContent={"space-between"} alignItems={"flex-start"}
                 >
                     <Text color={"white"} fontWeight={"bold"} fontSize={18}>
-                        Title: {photo?.title ?? "Photo title placeholder"}
+                        Title: {photo?.title ?? "Photo title placeholder."}
                     </Text>
                     <Text color={"white"} fontWeight={"thin"} fontSize={16}>
-                        Description: {photo?.description ?? photo?.alt_description ?? "Photo description placeholder"}
+                        Description: {photo?.description ?? photo?.alt_description ?? "Photo description placeholder."}
                     </Text>
 
                     <Flex w={"full"} className="photo-reactions" justifyContent={"space-evenly"} alignItems={"center"}>
