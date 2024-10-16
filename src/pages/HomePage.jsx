@@ -37,7 +37,7 @@ const HomePage = () => {
     return (
         <Box w={"full"} mx={0} mt={3} h="90vh" overflow="hidden">
             <InfiniteScroll
-                dataLength={images.length}
+                dataLength={images?.length}
                 next={fetchImages}
                 hasMore={havingMore}
                 loader={<Center><Spinner size={24} /></Center>}
